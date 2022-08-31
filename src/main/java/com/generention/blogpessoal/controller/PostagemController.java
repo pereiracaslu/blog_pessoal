@@ -1,9 +1,11 @@
 package com.generention.blogpessoal.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.generention.blogpessoal.model.Postagem;
@@ -22,10 +24,14 @@ public class PostagemController {
 		private PostagemRepository postagemRepository;
 	
 	//SELECT * FROM tb_postagem// 	indica o http, pode ter get, putch, delete e post
-	@GetMapping
+	@GetMapping("/{id}")
 	       //resposta	objeto do tipo postagem		
-	public ResponseEntity<List<Postagem>> getAll(){
+	public ResponseEntity<Postagem> getById(@PathVariable Long id){
 		//executa a resposta				//status ok = 200 
-		return ResponseEntity.ok(postagemRepository.findAll());
+		return postagemRepository.findById(id)
+		.map(resposta -> ResponseEntity.ok(resposta))
+		.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+		
 	}
-}
+	}
+
