@@ -13,7 +13,7 @@ import com.generention.blogpessoal.model.Postagem;
 @Repository                                              //objeto   //id
 public interface PostagemRepository extends JpaRepository<Postagem, Long> {
 	
-	
 	//Mesma coisa que no MySQL SELECT * FROM tb_postagens WHER titulo LIKE "%%";
 	public List <Postagem> findAllByTituloContainingIgnoreCase(String titulo);
-}
+	
+	}
