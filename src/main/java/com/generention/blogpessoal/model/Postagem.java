@@ -11,23 +11,31 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import org.hibernate.annotations.UpdateTimestamp;
-
+// indica ao spring que o objeto abaixo será uma tabela no banco de dados
 @Entity
+
+//Dar um nome a tabela a ser ciada, sem ela a tabela fica com o nome do objeto
 @Table (name = "tb_postagens")
 
 public class Postagem {
-	@Id
+	
+	@Id//indica que o id da tabela será uma chave primaria
+	//Definição de como será o auto incremento
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	//define o campo de texto que não comece com espaço
 	@NotBlank(message = "O atributo título é ogrigatório!")
-	@Size(min=5, max=100, message = "O atributo título deve conter no mínimo 05 e no máximo 100 caracteres")
+	//Tamanho max e min de caracteres que podem ser inseridas
+	@Size(min=5, max=100, message = "O atributo título deve conter no mínimo 05 caracteres e no máximo 100 caracteres")
 	private String titulo;
 	
+	//@NotNull define o campo de texto como obrigatório
 	@NotBlank(message = "O atributo título é ogrigatório!")
-	@Size(min=10, max=1000, message = "O atributo título deve conter no mínimo 10 e no máximo 1000 caracteres")
+	@Size(min=10, max=1000, message = "O atributo texto deve conter no mínimo 10 caracteres e no máximo 1000 caracteres")
 	private String texto;
 	
+	//Para mostrar a atualização da data.
 	@UpdateTimestamp
 	private LocalDateTime data;
 
