@@ -17,8 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.generention.blogpessoal.model.Postagem;
 import com.generention.blogpessoal.repository.PostagemRepository;
-
-import net.bytebuddy.dynamic.DynamicType.Builder.FieldDefinition.Optional;
+import com.generention.blogpessoal.repository.TemaRepository;
 
 import java.util.List;
 
@@ -34,6 +33,9 @@ public class PostagemController {
 		//injeção de independecia, tranfere a resposabilidade
 		@Autowired
 		private PostagemRepository postagemRepository;
+		
+		@Autowired
+		private TemaRepository temaRepository;
 	
 	//SELECT * FROM tb_postagem// 	indica o http, pode ter get, putch, delete e post
 	@GetMapping("/{id}")
@@ -51,18 +53,26 @@ public class PostagemController {
 	
 	@PostMapping 
 	public ResponseEntity<Postagem> post(@Valid @RequestBody Postagem postagem){
-		return ResponseEntity.status(HttpStatus.CREATED)
+		if(temaRepository.existsById(postagem.getTema().getId()))
+			return ResponseEntity.status(HttpStatus.CREATED)
 					.body(postagemRepository.save(postagem));
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 	}
 	
 	@PutMapping
 	public ResponseEntity<Postagem> put(@Valid @RequestBody Postagem postagem){
-		return postagemRepository.findById(postagem.getId())
-				.map(resposta -> ResponseEntity.status(HttpStatus.OK)
-						.body(postagemRepository.save(postagem)))
-				.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+		if (postagemRepository.existsById(postagem.getId())) {
+			
+			if (temaRepository.existsById(postagem.getTema().getId()))
+				
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+		}
+		
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		
 	}
-	
+		
+		
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
