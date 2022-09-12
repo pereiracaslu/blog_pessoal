@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "tb_temass")
+@Table(name = "tb_temas")
 public class Tema {
 	
 	@Id
@@ -25,9 +25,20 @@ public class Tema {
 	// descricao	String	VARCHAR(255)
 	@NotNull(message = "O Atributo Descrição é obrigatório")
 	private String descricao;
-
+	
+	
+	//1 pra muitos; mB = passa quem vai ser o um; cascade cada vez atualizado,
+	//todas as postagem são atualizadas, caso o tema seja excluido tudo é excluido
+	//										Efeito cascata
 	@OneToMany(mappedBy = "tema", cascade = CascadeType.ALL)
+	//Evita a recursividade, para não entrar em um loop infinito
+	/*e bom ter em mente que nas anotacoes tipo OneToMany, a primeira palavra One
+	 * vai sempre se referir a classe que foi inserida. Ou seja One dessa classe 
+	 * aqui to many da outra classe. E na postagem foi ManyToOne ou seja, many
+	 * dessa classe postagem to One da outra classe
+*/
 	@JsonIgnoreProperties("tema")
+	//Ao passar o many, o program já diz que vai passar, o List prepara para receber
 	private List<Postagem> postagem;
 	
 	public Long getId() {

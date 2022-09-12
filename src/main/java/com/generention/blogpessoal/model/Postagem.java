@@ -1,8 +1,7 @@
-
-
 package com.generention.blogpessoal.model;
 
 import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,79 +10,86 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-// indica ao spring que o objeto abaixo será uma tabela no banco de dados
+
+import org.hibernate.annotations.UpdateTimestamp;
+
 @Entity
-
-//Dar um nome a tabela a ser ciada, sem ela a tabela fica com o nome do objeto
-@Table (name = "tb_postagens")
-
+@Table(name = "tb_postagens")
 public class Postagem {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    private Long id;
 	
-	@Id//indica que o id da tabela será uma chave primaria
-	//Definição de como será o auto incremento
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @NotBlank(message = "O Atributo título é Obrigatório!") 
+    @Size(min = 5, max = 100, message = "O Atributo título deve conter no mínimo 05 e no máximo 100 caracteres")
+    private String titulo;
 	
-	//define o campo de texto que não comece com espaço
-	@NotBlank(message = "O atributo título é ogrigatório!")
-	//Tamanho max e min de caracteres que podem ser inseridas
-	@Size(min=5, max=100, message = "O atributo título deve conter no mínimo 05 caracteres e no máximo 100 caracteres")
-	private String titulo;
+    @NotBlank(message = "O Atributo texto é Obrigatório!")
+    @Size(min = 10, max = 1000, message = "O Atributo texto deve conter no mínimo 10 e no máximo 1000 caracteres")
+    private String texto;
 	
-	//@NotNull define o campo de texto como obrigatório
-	@NotBlank(message = "O atributo título é ogrigatório!")
-	@Size(min=10, max=1000, message = "O atributo texto deve conter no mínimo 10 caracteres e no máximo 1000 caracteres")
-	private String texto;
-	
-	//Para mostrar a atualização da data.
-	@UpdateTimestamp
-	private LocalDateTime data;
-	
-	@ManyToOne
-	@JsonIgnoreProperties("postagem")
-	private Tema tema;
+    @UpdateTimestamp
+    private LocalDateTime data;
 
-	public Long getId() {
-		return this.id;
-	}
+    @ManyToOne
+    @JsonIgnoreProperties("postagem")
+    private Tema tema;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @ManyToOne
+    @JsonIgnoreProperties("postagem")
+    private Usuario usuario;
 
-	public String getTitulo() {
-		return this.titulo;
-	}
+    /*Insira os Getters and Setters*/
 
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
+    public Long getId() {
+        return this.id;
+    }
 
-	public String getTexto() {
-		return this.texto;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setTexto(String texto) {
-		this.texto = texto;
-	}
+    public String getTitulo() {
+        return this.titulo;
+    }
 
-	public LocalDateTime getData() {
-		return this.data;
-	}
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
 
-	public void setData(LocalDateTime data) {
-		this.data = data;
-	}
+    public String getTexto() {
+        return this.texto;
+    }
 
-	public Tema getTema() {
-		return tema;
-	}
+    public void setTexto(String texto) {
+        this.texto = texto;
+    }
 
-	public void setTema(Tema tema) {
-		this.tema = tema;
-	}
+    public LocalDateTime getData() {
+        return this.data;
+    }
+
+    public void setData(LocalDateTime data) {
+        this.data = data;
+    }
+
+    public Tema getTema() {
+        return this.tema;
+    }
+
+    public void setTema(Tema tema) {
+        this.tema = tema;
+    }
+
+    public Usuario getUsuario() {
+        return this.usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 
 }
