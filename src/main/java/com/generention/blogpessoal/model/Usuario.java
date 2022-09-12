@@ -29,6 +29,8 @@ public class Usuario {
 
 	@NotNull(message = "O Atributo Usuário é Obrigatório!")
 	@Email(message = "O Atributo Usuário deve ser um email válido!")
+	//se coloca ususario por conta de email ja esta anotado, pois o @email, permite que so valide 
+	//com @email.com
 	private String usuario;
 
 	@NotBlank(message = "O Atributo Senha é Obrigatório!")

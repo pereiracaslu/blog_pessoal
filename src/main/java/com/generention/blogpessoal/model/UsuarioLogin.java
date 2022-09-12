@@ -7,6 +7,7 @@ public class UsuarioLogin {
 	private String usuario;
 	private String senha;
 	private String foto;
+	//Se a pessoa esta logado, chave digital
 	private String token;
 
 	public Long getId() {
