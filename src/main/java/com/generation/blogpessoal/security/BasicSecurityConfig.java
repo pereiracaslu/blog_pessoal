@@ -1,4 +1,4 @@
-package com.generention.blogpessoal.security;
+package com.generation.blogpessoal.security;
 
 
 import org.springframework.context.annotation.Bean;

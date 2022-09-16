@@ -1,4 +1,4 @@
-package com.generention.blogpessoal.controller;
+package com.generation.blogpessoal.controller;
 
 import java.util.List;
 
@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.generention.blogpessoal.model.Tema;
-import com.generention.blogpessoal.repository.TemaRepository;
+import com.generation.blogpessoal.model.Tema;
+import com.generation.blogpessoal.repository.TemaRepository;
 
 @RestController
 @RequestMapping("/temas")

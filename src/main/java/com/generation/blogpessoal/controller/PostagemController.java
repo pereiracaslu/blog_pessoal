@@ -1,4 +1,4 @@
-package com.generention.blogpessoal.controller;
+package com.generation.blogpessoal.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.generention.blogpessoal.model.Postagem;
-import com.generention.blogpessoal.repository.PostagemRepository;
-import com.generention.blogpessoal.repository.TemaRepository;
+import com.generation.blogpessoal.model.Postagem;
+import com.generation.blogpessoal.repository.PostagemRepository;
+import com.generation.blogpessoal.repository.TemaRepository;
 
 import java.util.List;
 
