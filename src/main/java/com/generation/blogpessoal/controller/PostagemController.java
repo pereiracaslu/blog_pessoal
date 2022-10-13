@@ -38,6 +38,10 @@ public class PostagemController {
 		private TemaRepository temaRepository;
 	
 	//SELECT * FROM tb_postagem// 	indica o http, pode ter get, putch, delete e post
+	@GetMapping
+	public ResponseEntity<List<Postagem>> getAll(){
+		return ResponseEntity.ok(postagemRepository.findAll());
+	}
 	@GetMapping("/{id}")
 	       //resposta	objeto do tipo postagem		
 	public ResponseEntity<Postagem> getById(@PathVariable Long id){
